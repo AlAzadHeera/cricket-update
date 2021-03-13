@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Oranienbaum&display=swap');
+
+*{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+a{
+	cursor: pointer;
+}
+
+.font-one{
+	font-family: 'Oranienbaum', serif;
+}
+
+.badge{
+	border-radius: 0;
+}
+
+#main-section{
+	height: 100vh;
+	background: #2b2b2b;
+}
+
+.top-bar{
+	background: #343A40;
+	padding: 10px;
+	margin:  10px 0px;
+	border:  .5px solid #000;
+	color: aliceblue;
+	font-weight: 900;
+}
+
+.match-list{
+	max-height: 350px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
+.match-score{
+	height: 350px;
+	color: aliceblue;
+	border: 1px solid #ccc;
+	padding: 10px;
+}
+
+.team{
+	text-align: center;
+	color: aliceblue;
+	display: flex;
+	justify-content:  space-around;
+}
+
+.team-name{}
+
+.team-name h5{
+	padding: 15px 15px;
+}
+
+.team-1{
+	
+}
+
+.team-1 h5{
+	background: #32A350;
+}
+
+.team-2{
+	
+}
+
+.team-2 h5{
+	background: #F3B605;
+}
+
+.score{
+	color: aliceblue;
+	height: 250px;
+	padding-top: 13%;
+	background: #00917c;
+}
+
+.score-one{
+	width: 75%;
+	margin:  0 auto;
+	text-align: center;
+	background-color: #fd3a69;
+	padding: 10px 0px;
+	margin-bottom: 5px;
+}
+
+.score-two{
+	width: 75%;
+	margin:  0 auto;
+	text-align: center;
+	background-color: #ffa45b;
+	padding: 10px 0px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

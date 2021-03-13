@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Bootstrap Example</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="jquery.funnyText.css">
+	<link rel="stylesheet" href="custom-scroll.css">
+	<link rel="stylesheet" href="style.css">
+
+
+	<style>
+		.css-serial {
+			counter-reset: serial-number;
+		}
+
+		.css-serial td:first-child:before {
+			counter-increment: serial-number;
+			content: counter(serial-number);
+		}
+
+		.css-serial-1 {
+			counter-reset: serial-number;
+		}
+
+		.css-serial-1 td:first-child:before {
+			counter-increment: serial-number;
+			content: counter(serial-number);
+		}
+
+		.hidden{
+			visibility: hidden;
+		}
+		
+		.match-score *{
+			visibility: visible !important;
+			background: red;
+		}
+		
+	</style>
+
+
+
+</head>
+
+<body>
+	<section id="main-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="top-bar text-center font-one">
+						<div class="funny-text">Live Cricket Score Update</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-4">
+					<div data-simplebar class="match-list">
+						<table class="table table-striped table-dark css-serial">
+							<thead>
+								<tr>
+									<th scope="col" style="width:10%">#</th>
+									<th scope="col">Match<span class="badge badge-success float-right">On Field</span></th>
+								</tr>
+							</thead>
+							<tbody id="running-match-table"></tbody>
+						</table>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="match-score">
+						<div class="team">
+							<div class="team-name team-1">
+								<h5 id="team_1"></h5>
+							</div>
+							<div class="vs">
+								<h1>VS</h1>
+							</div>
+							<div class="team-name team-2">
+								<h5 id="team_2"></h5>
+							</div>
+						</div>
+						<div class="score">
+							<div class="score-one">
+								<h5 id="score-one"></h5>
+							</div>
+							<div class="score-two">
+								<h5 id="score-two"></h5>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div data-simplebar class="match-list">
+						<table class="table table-striped table-dark css-serial-1">
+							<thead>
+								<tr>
+									<th scope="col" style="width:10%">#</th>
+									<th scope="col">Match<span class="badge badge-primary float-right">Recent</span></th>
+								</tr>
+							</thead>
+							<tbody id="upcomming-match-table"></tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="jquery.funnyText.js"></script>
+	<script src="app.js"></script>
+
+	<script>
+		$(document).ready(function() {
+			$('.funny-text').funnyText({
+				speed: 200,
+				borderColor: 'black',
+				activeColor: 'white',
+				color: 'white',
+				fontSize: '3em',
+				direction: 'both'
+			});
+		});
+
+	</script>
+
+
+	<script>
+		function singleMatch(unique_id) {
+			var $_match_id = unique_id
+			$.ajax({
+				url: 'https://cricapi.com/api/cricketScore?apikey=i5A34OqOdAMyVcA1gi9yjtg3wHx1&unique_id=' + $_match_id,
+				method: 'get',
+				dataType: 'json',
+				success: function(data) {
+					var $_matchInfo = data;
+					var $_score = $_matchInfo.score
+
+					if ($_score = $_matchInfo.score) {
+						var $_final = $_score.toString()
+						var $_splite = $_final.split("v")
+						var $_team_one_score = $_splite[0]
+						var $_team_two_score = $_splite[1]
+					}
+					var $_team_one = $_matchInfo['team-1']
+					var $_team_two = $_matchInfo['team-2']
+
+
+					if ($_score) {
+						document.getElementById("score-one").innerHTML = $_team_one_score
+						document.getElementById("score-two").innerHTML = $_team_two_score
+					} else {
+						document.getElementById("score-one").innerHTML = "Score Not Available"
+						document.getElementById("score-two").innerHTML = "Score Not Available"
+					}
+
+					document.getElementById("team_1").innerHTML = $_team_one
+					document.getElementById("team_2").innerHTML = $_team_two
+
+				}
+			})
+		}
+
+	</script>
+
+	<script>
+		setTimeout(() => {
+			document.querySelectorAll("body *:not( .match-score )")
+				.forEach((v) => {
+					v.classList.add("hidden");
+				});
+		}, 1000);
+
+	</script>
+
+</body>
+
+</html>
